@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<argos-configuration>
+
+  <framework>
+    <system threads="1" />
+    <experiment length="0"
+                ticks_per_second="10"
+                random_seed="124" />
+  </framework>
+
+  <controllers>
+
+        <buzz_controller_footbot id="fdc">  
+          <actuators>
+            <differential_steering implementation="default" />
+            <leds                  implementation="default" medium="leds" />
+            <range_and_bearing implementation="default" />
+          </actuators>  
+          <sensors>
+            <range_and_bearing implementation="medium" medium="rab" show_rays="true" noise_std_dev="0" />
+          </sensors>
+          <params bytecode_file="./control.bo" debug_file="./control.bdb">
+          <wheel_turning hard_turn_angle_threshold="90"
+                         soft_turn_angle_threshold="70"
+                         no_turn_angle_threshold="10"
+                         max_speed="15" />
+          </params>   
+        </buzz_controller_footbot>
+        
+  </controllers>
+
+
+
+  <arena size="10, 10, 1" center="5,5,0.5">
+    
+    <foot-bot id="fb0" rab_data_size="1000" rab_range="3">
+        <body position="6,3,0" orientation="0,0,0" />
+        <controller config="fdc"/>
+    </foot-bot>
+	
+    <foot-bot id="fb1" rab_data_size="1000" rab_range="3">
+        <body position="6,5,0" orientation="0,0,0" />
+        <controller config="fdc"/>
+    </foot-bot>
+	
+    <foot-bot id="fb2" rab_data_size="1000" rab_range="3">
+        <body position="6.5,7,0" orientation="0,0,0" />
+        <controller config="fdc"/>
+    </foot-bot>
+	
+    <foot-bot id="fb3" rab_data_size="1000" rab_range="3">
+        <body position="4,3,0" orientation="0,0,0" />
+        <controller config="fdc"/>
+    </foot-bot>
+	
+    <!--foot-bot id="fb4" rab_data_size="1000" rab_range="3">
+        <body position="4,5,0" orientation="0,0,0" />
+        <controller config="fdc"/>
+    </foot-bot-->
+
+
+  </arena>
+
+
+
+  <physics_engines>
+    <dynamics2d id="dyn2d" />
+  </physics_engines>
+
+  <media>
+     <range_and_bearing id="rab" />
+     <led id="leds" />
+  </media>
+
+  <visualization>  
+    <qt-opengl>
+        <camera>
+           <placement idx="0" position="-1.59395,1.34604,7.37307" look_at="-1.0394,1.63474,6.59261" up="0.69227,0.360402,0.625199" lens_focal_length="20" />
+           <placement idx="1" position="-1.40203,0,3.23277" look_at="-1.08235,0,2.28525" up="0.947525,0,0.319682" lens_focal_length="20" />
+        </camera>
+    </qt-opengl>
+  </visualization>
+
+</argos-configuration>
